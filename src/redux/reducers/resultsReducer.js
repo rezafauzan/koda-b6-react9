@@ -1,17 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// const [state, [[addData,removeData]] = useState(initialState)
 const resultsReducer = createSlice({
     name: "surveyResults",
     initialState: [],
     reducers: {
-        addSurveyData: (state, action) => {
+        addData: (state, action) => {
             state.push(action.payload)
         },
-        removeSurveyData: (state, action) => {
+        removeData: (state, action) => {
             state.splice(action.payload, 1)
         }
     }
 })
 
-export const {addSurveyData, removeSurveyData} = resultsReducer.actions
+export const {addData, removeData} = resultsReducer.actions
 export default resultsReducer.reducer
