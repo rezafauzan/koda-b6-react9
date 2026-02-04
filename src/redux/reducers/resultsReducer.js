@@ -6,9 +6,12 @@ const resultsReducer = createSlice({
     reducers: {
         addSurveyData: (state, action) => {
             state.push(action.payload)
+        },
+        removeSurveyData: (state, action) => {
+            state.splice(action.payload, 1)
         }
     }
 })
 
-export const {addSurveyData} = resultsReducer.actions
+export const {addSurveyData, removeSurveyData} = resultsReducer.actions
 export default resultsReducer.reducer

@@ -1,9 +1,14 @@
-import { useSelector } from "react-redux"
-import Form from "./Form"
+import { AiOutlineCloseCircle } from "react-icons/ai"; 
+import { useDispatch, useSelector } from "react-redux"
+import { removeSurveyData } from "../redux/reducers/resultsReducer";
 import { Link } from "react-router-dom"
 
 const Results = () => {
     const surveyData = useSelector(state => state.resultsReducer)
+    const dispatch = useDispatch()
+    function removeData(index){
+        dispatch(removeSurveyData(index))
+    }
     return (
         <div className="container max-w-220 flex flex-col justify-center gap-4 items-center mx-auto mt-4">
             <div className="bg-white shadow p-4 border-t-4 border-t-fuchsia-700 rounded flex flex-col justify-center gap-4">
@@ -19,6 +24,7 @@ const Results = () => {
                             <th className="border border-black">Jenis Kelamin</th>
                             <th className="border border-black">Perokok</th>
                             <th className="border border-black">Merk Rokok Yang Pernah Dicoba</th>
+                            <th className="border border-black">Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,13 +32,14 @@ const Results = () => {
                             (
                                 surveyData.length > 0 ?
                                     surveyData.map(
-                                        data =>
+                                        (data, index) =>
                                             <tr>
                                                 <td className="border border-black">{data.fullname}</td>
                                                 <td className="border border-black">{data.age}</td>
                                                 <td className="border border-black">{(data.gender === "laki-laki" ? "Laki Laki" : "Perempuan")}</td>
                                                 <td className="border border-black">{(data.isSmoker === "true" ? "Perokok" : "Tidak merokok")}</td>
                                                 <td className="border border-black">{(Array.isArray(data.cigarBrands.length) ? data.cigarBrands.forEach(brand => brand) : "Tidak ada merk dari list yang pernah dicoba")}</td>
+                                                <td className="border border-black"><button onClick={()=>{removeData(index)}} className="text-red-700 cursor-pointer"><AiOutlineCloseCircle /></button></td>
                                             </tr>
                                     )
                                     :
