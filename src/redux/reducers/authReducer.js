@@ -8,9 +8,12 @@ const authReducer = createSlice({
     reducers: {
         login: (state, action) => {
                 state.email = action.payload.email
+        },
+        logout: () => {
+                state.email = ""
         }
     }
 })
 
-export const { login } = authReducer.actions
+export const { login, logout } = authReducer.actions
 export default authReducer.reducer
