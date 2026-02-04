@@ -3,6 +3,7 @@ import Form from "/src/pages/Form"
 import Results from "/src/pages/Results"
 import { store } from "/src/redux/store"
 import { Provider } from "react-redux"
+import Login from "./pages/Login"
 
 function App() {
   const router = createBrowserRouter(
@@ -10,6 +11,10 @@ function App() {
       {
         path: '/',
         element: <Form />
+      },
+      {
+        path: '/login',
+        element: <Login />
       },
       {
         path: '/results',
