@@ -1,7 +1,13 @@
 import { useForm } from "react-hook-form"
 import Input from "../components/Input";
+import { useDispatch, useSelector } from "react-redux";
+import { addSurveyData } from "../redux/reducers/resultsReducer";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
+    const dispatch = useDispatch()
+    const navigator = useNavigate()
+    
     const { register, handleSubmit } = useForm(
         {
             defaultValues: {
@@ -11,11 +17,12 @@ const Form = () => {
         }
     );
     function addData(data) {
-        console.log(data)
+        dispatch(addSurveyData(data))
+        navigator("/results")
     }
     return (
         <section id="form">
-            <div className="container max-w-360 flex flex-col justify-center gap-4 items-center mx-auto">
+            <div className="container max-w-180 flex flex-col justify-center gap-4 items-center mx-auto mt-4">
                 <div className="bg-white shadow p-4 border-t-4 border-t-fuchsia-700 rounded flex flex-col justify-center gap-4">
                     <h1 className="font-bold">Form Survey Perokok</h1>
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat, sapiente esse, quam eius optio perspiciatis ea voluptatum dolore molestias ut eaque laudantium doloribus alias voluptate odit praesentium consequuntur pariatur? Eos.</p>
@@ -27,22 +34,22 @@ const Form = () => {
                     <label htmlFor="gender-laki-laki" className="bg-white shadow p-4 flex flex-col justify-center gap-4">
                         <span>Apa jenis kelamin anda ?<sup className="text-red-700">*</sup></span>
                         <label htmlFor="gender-laki-laki" className="flex items-center gap-4">
-                            <input type="radio" {...register("gender")} id="gender-laki-laki" value={"laki-laki"} required/>
+                            <input type="radio" {...register("gender")} id="gender-laki-laki" value={"laki-laki"} required />
                             <span>Laki-laki</span>
                         </label>
                         <label htmlFor="gender-perempuan" className="flex items-center gap-4">
-                            <input type="radio" {...register("gender")} id="gender-perempuan" value={"perempuan"} required/>
+                            <input type="radio" {...register("gender")} id="gender-perempuan" value={"perempuan"} required />
                             <span>Perempuan</span>
                         </label>
                     </label>
                     <label htmlFor="notSmoker" className="bg-white shadow p-4 flex flex-col justify-center gap-4">
                         <span>Apakah anda seorang perokok?<sup className="text-red-700">*</sup></span>
                         <label htmlFor="smoker" className="flex items-center gap-4">
-                            <input type="radio" {...register("isSmoker")} id="smoker" value={true} required/>
+                            <input type="radio" {...register("isSmoker")} id="smoker" value={true} required />
                             <span>Ya</span>
                         </label>
                         <label htmlFor="notSmoker" className="flex items-center gap-4">
-                            <input type="radio" {...register("isSmoker")} id="notSmoker" value={false} required/>
+                            <input type="radio" {...register("isSmoker")} id="notSmoker" value={false} required />
                             <span>Tidak</span>
                         </label>
                     </label>
@@ -69,14 +76,14 @@ const Form = () => {
                             <span>Esse</span>
                         </label>
                     </label>
-                        <div className="flex gap-4 items-center h-10">
-                            <button type="submit" className="cursor-pointer bg-fuchsia-700 h-full w-16 text-white rounded flex flex-col justify-center items-center">
-                                Kirim
-                            </button>
-                            <button type="reset" className="cursor-pointer">
-                                Kosongkan
-                            </button>
-                        </div>
+                    <div className="flex gap-4 items-center h-10">
+                        <button type="submit" className="cursor-pointer bg-fuchsia-700 h-full w-16 text-white rounded flex flex-col justify-center items-center">
+                            Kirim
+                        </button>
+                        <button type="reset" className="cursor-pointer">
+                            Kosongkan
+                        </button>
+                    </div>
                 </form>
             </div>
         </section>
