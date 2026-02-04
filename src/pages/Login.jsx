@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { login } from "../redux/reducers/authReducer"
 import { useNavigate } from "react-router-dom"
 
@@ -21,6 +21,7 @@ const Login = () => {
             alert("Password atau email salah")
         }
     }
+
     return (
         <div className="flex items-center justify-center h-screen">
             <form onSubmit={handleSubmit(formLogin)} className="flex flex-col justify-center gap-4 p-4 bg-white rounded shadow w-full max-w-180">
