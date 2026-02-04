@@ -22,15 +22,22 @@ const Results = () => {
                     </thead>
                     <tbody>
                         {
-                            surveyData.map(
-                                data =>
-                                    <tr>
-                                        <td className="border border-black">{data.fullname}</td>
-                                        <td className="border border-black">{data.age}</td>
-                                        <td className="border border-black">{(data.gender === "laki-laki" ? "Laki Laki" : "Perempuan")}</td>
-                                        <td className="border border-black">{(data.isSmoker === "true" ? "Perokok" : "Tidak merokok")}</td>
-                                        <td className="border border-black">{(Array.isArray(data.cigarBrands.length) ? data.cigarBrands.forEach(brand=>brand) : "Tidak ada merk dari list yang pernah dicoba")}</td>
-                                    </tr>
+                            (
+                                surveyData.length > 0 ?
+                                    surveyData.map(
+                                        data =>
+                                            <tr>
+                                                <td className="border border-black">{data.fullname}</td>
+                                                <td className="border border-black">{data.age}</td>
+                                                <td className="border border-black">{(data.gender === "laki-laki" ? "Laki Laki" : "Perempuan")}</td>
+                                                <td className="border border-black">{(data.isSmoker === "true" ? "Perokok" : "Tidak merokok")}</td>
+                                                <td className="border border-black">{(Array.isArray(data.cigarBrands.length) ? data.cigarBrands.forEach(brand => brand) : "Tidak ada merk dari list yang pernah dicoba")}</td>
+                                            </tr>
+                                    )
+                                    :
+                                    (<tr>
+                                        <td className="font-bold text-lg span" colspan={5}>Data masih kosong</td>
+                                    </tr>)
                             )
                         }
                     </tbody>
