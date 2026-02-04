@@ -1,13 +1,23 @@
-import { AiOutlineCloseCircle } from "react-icons/ai"; 
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux"
-import { removeSurveyData } from "../redux/reducers/resultsReducer";
+import { removeData } from "../redux/reducers/resultsReducer";
 import { Link } from "react-router-dom"
 
 const Results = () => {
     const surveyData = useSelector(state => state.resultsReducer)
+    const user = useSelector(state => state.authReducer.email)
     const dispatch = useDispatch()
-    function removeData(index){
-        dispatch(removeSurveyData(index))
+    const navigator = useNavigate()
+
+    useEffect(() => {
+        if (!user) {
+            alert("Anda belum login! login terlebih dahulu")
+            navigator("/login")
+        }
+    }, [])
+
+    function removeData(index) {
+        dispatch(removeData(index))
     }
     return (
         <div className="container max-w-220 flex flex-col justify-center gap-4 items-center mx-auto mt-4">
@@ -39,7 +49,7 @@ const Results = () => {
                                                 <td className="border border-black">{(data.gender === "laki-laki" ? "Laki Laki" : "Perempuan")}</td>
                                                 <td className="border border-black">{(data.isSmoker === "true" ? "Perokok" : "Tidak merokok")}</td>
                                                 <td className="border border-black">{(Array.isArray(data.cigarBrands.length) ? data.cigarBrands.forEach(brand => brand) : "Tidak ada merk dari list yang pernah dicoba")}</td>
-                                                <td className="border border-black"><button onClick={()=>{removeData(index)}} className="text-red-700 cursor-pointer"><AiOutlineCloseCircle /></button></td>
+                                                <td className="border border-black"><button onClick={() => { removeData(index) }} className="text-red-700 cursor-pointer"><AiOutlineCloseCircle /></button></td>
                                             </tr>
                                     )
                                     :

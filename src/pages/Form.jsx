@@ -1,13 +1,21 @@
 import { useForm } from "react-hook-form"
 import Input from "../components/Input";
 import { useDispatch, useSelector } from "react-redux";
-import { addSurveyData } from "../redux/reducers/resultsReducer";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Form = () => {
     const dispatch = useDispatch()
     const navigator = useNavigate()
-    
+    const user = useSelector(state => state.authReducer.email)
+
+    useEffect(()=>{
+        if(!user){
+            alert("Anda belum login! login terlebih dahulu")
+            navigator("/login")
+        }
+    }, [])
+
     const { register, handleSubmit } = useForm(
         {
             defaultValues: {
@@ -17,7 +25,7 @@ const Form = () => {
         }
     );
     function addData(data) {
-        dispatch(addSurveyData(data))
+        dispatch(addData(data))
         navigator("/results")
     }
     return (
