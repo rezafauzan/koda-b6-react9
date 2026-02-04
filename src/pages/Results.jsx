@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux"
+import Form from "./Form"
 
 const Results = () => {
+    const surveyData = useSelector(state => state.resultsReducer)
     return (
         <div className="container max-w-220 flex flex-col justify-center gap-4 items-center mx-auto mt-4">
             <div className="bg-white shadow p-4 border-t-4 border-t-fuchsia-700 rounded flex flex-col justify-center gap-4">
@@ -19,7 +21,18 @@ const Results = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        {
+                            surveyData.map(
+                                data =>
+                                    <tr>
+                                        <td className="border border-black">{data.fullname}</td>
+                                        <td className="border border-black">{data.age}</td>
+                                        <td className="border border-black">{(data.gender === "laki-laki" ? "Laki Laki" : "Perempuan")}</td>
+                                        <td className="border border-black">{(data.isSmoker === "true" ? "Perokok" : "Tidak merokok")}</td>
+                                        <td className="border border-black">{(Array.isArray(data.cigarBrands.length) ? data.cigarBrands.forEach(brand=>brand) : "Tidak ada merk dari list yang pernah dicoba")}</td>
+                                    </tr>
+                            )
+                        }
                     </tbody>
                 </table>
             </div>
