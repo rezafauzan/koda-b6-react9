@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux"
 import Form from "./Form"
+import { Link } from "react-router-dom"
 
 const Results = () => {
     const surveyData = useSelector(state => state.resultsReducer)
@@ -42,6 +43,7 @@ const Results = () => {
                         }
                     </tbody>
                 </table>
+                <Link to="/" className="text-fuchsia-700/60 hover:text-fuchsia-700">Kembali ke form survey</Link>
             </div>
         </div>
     )
