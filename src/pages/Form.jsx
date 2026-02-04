@@ -1,9 +1,17 @@
 import { useForm } from "react-hook-form"
+import Input from "../components/Input";
 
 const Form = () => {
-    const { register, handleSubmit } = useForm();
-    function addData() {
-
+    const { register, handleSubmit } = useForm(
+        {
+            defaultValues: {
+                gender: "laki-laki",
+                isSmoker: "false"
+            }
+        }
+    );
+    function addData(data) {
+        console.log(data)
     }
     return (
         <section id="form">
@@ -14,56 +22,50 @@ const Form = () => {
                     <span className="text-red-700"><sup>*</sup>Menunjukan form harus diisi</span>
                 </div>
                 <form onSubmit={handleSubmit(addData)} className="flex flex-col gap-4 justify-center w-full">
-                    <label htmlFor="fullname" className="bg-white shadow p-4 flex flex-col justify-center gap-4">
-                        <span>Siapa nama anda ?</span>
-                        <input type="text" name="fullname" id="fullname" className="h-10 outline-0 border-b border-b-fuchsia-700" placeholder="Masukan nama anda" />
-                    </label>
-                    <label htmlFor="age" className="bg-white shadow p-4 flex flex-col justify-center gap-4">
-                        <span>Berapa umur anda ?</span>
-                        <input type="text" name="age" id="age" className="h-10 outline-0 border-b border-b-fuchsia-700" placeholder="Masukan nama anda" />
-                    </label>
-                    <label for="gender-laki-laki" className="bg-white shadow p-4 flex flex-col justify-center gap-4">
-                        <span>Apa jenis kelamin anda ?</span>
+                    <Input labelName="fullname" labelText="Siapa nama anda ?" type="text" {...register("fullname")} placeholder="Masukan nama anda" required={true} />
+                    <Input labelName="age" labelText="Berapa umur anda ?" type="number" {...register("age")} placeholder="Masukan umur anda" required={true} />
+                    <label htmlFor="gender-laki-laki" className="bg-white shadow p-4 flex flex-col justify-center gap-4">
+                        <span>Apa jenis kelamin anda ?<sup className="text-red-700">*</sup></span>
                         <label htmlFor="gender-laki-laki" className="flex items-center gap-4">
-                            <input type="radio" name="gender" id="gender-laki-laki" value={"laki-laki"} />
+                            <input type="radio" {...register("gender")} id="gender-laki-laki" value={"laki-laki"} required/>
                             <span>Laki-laki</span>
                         </label>
                         <label htmlFor="gender-perempuan" className="flex items-center gap-4">
-                            <input type="radio" name="gender" id="gender-perempuan" value={"perempuan"} />
+                            <input type="radio" {...register("gender")} id="gender-perempuan" value={"perempuan"} required/>
                             <span>Perempuan</span>
                         </label>
                     </label>
-                    <label for="notSmoker" className="bg-white shadow p-4 flex flex-col justify-center gap-4">
-                        <span>Apakah anda seorang perokok?</span>
+                    <label htmlFor="notSmoker" className="bg-white shadow p-4 flex flex-col justify-center gap-4">
+                        <span>Apakah anda seorang perokok?<sup className="text-red-700">*</sup></span>
                         <label htmlFor="smoker" className="flex items-center gap-4">
-                            <input type="radio" name="isSmoker" id="smoker" value={"smoker"} />
+                            <input type="radio" {...register("isSmoker")} id="smoker" value={true} required/>
                             <span>Ya</span>
                         </label>
                         <label htmlFor="notSmoker" className="flex items-center gap-4">
-                            <input type="radio" name="isSmoker" id="notSmoker" value={"notSmoker"} />
+                            <input type="radio" {...register("isSmoker")} id="notSmoker" value={false} required/>
                             <span>Tidak</span>
                         </label>
                     </label>
                     <label className="bg-white shadow p-4 flex flex-col justify-center gap-4">
-                        <span>Apakah anda seorang perokok?</span>
+                        <span>Jika ya, rokok apa yang pernah anda coba?</span>
                         <label htmlFor="gudang-garam" className="flex items-center gap-4">
-                            <input type="checkbox" name="cigarBrands" id="gudang-garam" value={"gudang-garam"} />
+                            <input type="checkbox" {...register("cigarBrands")} id="gudang-garam" value={"gudang-garam"} />
                             <span>Gudang Garam</span>
                         </label>
                         <label htmlFor="filter" className="flex items-center gap-4">
-                            <input type="checkbox" name="cigarBrands" id="filter" value={"filter"} />
+                            <input type="checkbox" {...register("cigarBrands")} id="filter" value={"filter"} />
                             <span>Filter</span>
                         </label>
                         <label htmlFor="lucky-strike" className="flex items-center gap-4">
-                            <input type="checkbox" name="cigarBrands" id="lucky-strike" value={"lucky-strike"} />
+                            <input type="checkbox" {...register("cigarBrands")} id="lucky-strike" value={"lucky-strike"} />
                             <span>Lucky Strike</span>
                         </label>
                         <label htmlFor="marlboro" className="flex items-center gap-4">
-                            <input type="checkbox" name="cigarBrands" id="marlboro" value={"marlboro"} />
+                            <input type="checkbox" {...register("cigarBrands")} id="marlboro" value={"marlboro"} />
                             <span>Marlboro</span>
                         </label>
                         <label htmlFor="esse" className="flex items-center gap-4">
-                            <input type="checkbox" name="cigarBrands" id="esse" value={"esse"} />
+                            <input type="checkbox" {...register("cigarBrands")} id="esse" value={"esse"} />
                             <span>Esse</span>
                         </label>
                     </label>
