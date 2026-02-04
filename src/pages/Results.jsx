@@ -55,13 +55,13 @@ const Results = () => {
                                                 <td className="border border-black">{data.age}</td>
                                                 <td className="border border-black">{(data.gender === "laki-laki" ? "Laki Laki" : "Perempuan")}</td>
                                                 <td className="border border-black">{(data.isSmoker === "true" ? "Perokok" : "Tidak merokok")}</td>
-                                                <td className="border border-black">{(Array.isArray(data.cigarBrands.length) ? data.cigarBrands.forEach(brand => brand) : "Tidak ada merk dari list yang pernah dicoba")}</td>
+                                                <td className="border border-black">{(Array.isArray(data.cigarBrands) ? <ul className="list-disc text-start pl-8">{data.cigarBrands.map(brand => <li>{brand}</li>)}</ul> : "Tidak ada merk dari list yang pernah dicoba")}</td>
                                                 <td className="border border-black"><button onClick={() => { removeData(index) }} className="text-red-700 cursor-pointer"><AiOutlineCloseCircle /></button></td>
                                             </tr>
                                     )
                                     :
                                     (<tr>
-                                        <td className="font-bold text-lg span" colspan={5}>Data masih kosong</td>
+                                        <td className="font-bold text-lg span" colSpan={5}>Data masih kosong</td>
                                     </tr>)
                             )
                         }
