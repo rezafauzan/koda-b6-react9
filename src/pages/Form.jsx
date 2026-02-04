@@ -3,14 +3,15 @@ import Input from "../components/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { addData } from "../redux/reducers/resultsReducer";
 
 const Form = () => {
     const dispatch = useDispatch()
     const navigator = useNavigate()
     const user = useSelector(state => state.authReducer.email)
 
-    useEffect(()=>{
-        if(!user){
+    useEffect(() => {
+        if (!user) {
             alert("Anda belum login! login terlebih dahulu")
             navigator("/login")
         }
@@ -24,19 +25,25 @@ const Form = () => {
             }
         }
     );
-    function addData(data) {
+    function sendData(data) {
         dispatch(addData(data))
         navigator("/results")
     }
+    function signout() {
+        alert("Logout berhasil! Silahkan login")
+        dispatch(logout())
+        navigator("/login")
+    }
     return (
         <section id="form">
+            <button onClick={signout} className="h-10 p-4 bg-red-800 text-white fixed top-4 right-4 flex justify-center items-center rounded cursor-pointer">Logout</button>
             <div className="container max-w-180 flex flex-col justify-center gap-4 items-center mx-auto mt-4">
                 <div className="bg-white shadow p-4 border-t-4 border-t-fuchsia-700 rounded flex flex-col justify-center gap-4">
                     <h1 className="font-bold">Form Survey Perokok</h1>
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat, sapiente esse, quam eius optio perspiciatis ea voluptatum dolore molestias ut eaque laudantium doloribus alias voluptate odit praesentium consequuntur pariatur? Eos.</p>
                     <span className="text-red-700"><sup>*</sup>Menunjukan form harus diisi</span>
                 </div>
-                <form onSubmit={handleSubmit(addData)} className="flex flex-col gap-4 justify-center w-full">
+                <form onSubmit={handleSubmit(sendData)} className="flex flex-col gap-4 justify-center w-full">
                     <Input labelName="fullname" labelText="Siapa nama anda ?" type="text" {...register("fullname")} placeholder="Masukan nama anda" required={true} />
                     <Input labelName="age" labelText="Berapa umur anda ?" type="number" {...register("age")} placeholder="Masukan umur anda" required={true} />
                     <label htmlFor="gender-laki-laki" className="bg-white shadow p-4 flex flex-col justify-center gap-4">

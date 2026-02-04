@@ -1,7 +1,8 @@
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux"
 import { removeData } from "../redux/reducers/resultsReducer";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useEffect } from "react";
 
 const Results = () => {
     const surveyData = useSelector(state => state.resultsReducer)
@@ -19,8 +20,14 @@ const Results = () => {
     function removeData(index) {
         dispatch(removeData(index))
     }
+    function signout() {
+        alert("Logout berhasil! Silahkan login")
+        dispatch(logout())
+        navigator("/login")
+    }
     return (
         <div className="container max-w-220 flex flex-col justify-center gap-4 items-center mx-auto mt-4">
+            <button onClick={signout} className="h-10 p-4 bg-red-800 text-white fixed top-4 right-4 flex justify-center items-center rounded cursor-pointer">Logout</button>
             <div className="bg-white shadow p-4 border-t-4 border-t-fuchsia-700 rounded flex flex-col justify-center gap-4">
                 <h1 className="font-bold">Hasil Form Survey Perokok</h1>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat, sapiente esse, quam eius optio perspiciatis ea voluptatum dolore molestias ut eaque laudantium doloribus alias voluptate odit praesentium consequuntur pariatur? Eos.</p>
